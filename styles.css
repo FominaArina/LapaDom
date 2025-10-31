@@ -53,7 +53,7 @@ header {
 }
 
 .hero h1 {
-    font-size: 2.8em;
+    font-size: 2.0em;
     margin-bottom: 40px;
 }
 
@@ -100,7 +100,7 @@ header {
 
 
 section {
-    padding: 60px 0;
+    padding: 20px 0;
 }
 
 .how-grid, .advantages-grid, .sitter-grid {
@@ -255,3 +255,4 @@ footer {
     align-self: center;
     margin-top: 15px;
 }
+
