@@ -6,7 +6,6 @@
   <title>LapaDom — Найти передержку</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Скрываем контакты по умолчанию */
     .contact-info {
       display: none;
       margin-top: 10px;
@@ -28,6 +27,55 @@
 
     .btn.secondary:hover {
       background-color: #2c5c44;
+    }
+
+    /* Стили для отзывов */
+    .reviews-section {
+      margin-top: 15px;
+    }
+    .review-form {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 5px;
+    }
+    .review-form.show {
+      display: block;
+    }
+    .review-form input,
+    .review-form select,
+    .review-form textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    .review-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .star-rating {
+      color: gold;
+      font-size: 1.2em;
+    }
+    .show-reviews-btn {
+      background: none;
+      border: none;
+      color: #3a7c59;
+      cursor: pointer;
+      text-decoration: underline;
+      margin: 5px 0;
+    }
+    /* NEW: стиль для звёзд в заголовке карточки */
+    .rating-stars {
+      color: gold;
+      font-size: 1.1em;
+      margin-left: 5px;
     }
   </style>
 </head>
@@ -71,289 +119,309 @@
   </form>
 </section>
 
-<div class="sitter-grid" id="sitterGrid">
-  <div class="sitter-card" 
-       data-city="казань"
-       data-animal="собака"
-       data-with-animals="true"
-       data-with-children="false">
-    <img src="https://img.freepik.com/free-photo/full-shot-woman-with-dog-studio_23-2150747648.jpg" alt="Наталья">
-    <h3>Наталья, Казань ⭐⭐⭐⭐⭐</h3>
-    <p>Профессиональный кинолог, опыт более 10 лет.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 921 115 24 37</p>
-      <p><strong>Email:</strong> natalia@mail.ru</p>
-      <p><strong>Цена:</strong> 1500 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card" 
-       data-city="санкт-петербург"
-       data-animal="собака"
-       data-with-animals="true"
-       data-with-children="true">
-    <img src="https://i.ibb.co/4RHMKKX8/photo-2025-10-29-23-38-20.jpg" alt="photo-2025-10-29-23-38-20" border="0"></a>
-    <h3>Анна, Санкт-Петербург ⭐⭐⭐⭐⭐</h3>
-    <p>Люблю животных, есть опыт ухода за собаками и щенками.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 921 433 26 69</p>
-      <p><strong>Email:</strong> Aristova.a.v@gmail.com</p>
-      <p><strong>Цена:</strong> 1700 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card"
-       data-city="москва"
-       data-animal="кошка"
-       data-with-animals="true"
-       data-with-children="false">
-    <img src="https://i.pinimg.com/736x/33/f1/ba/33f1ba4a71b71f3739845c756806070e.jpg" alt="Мария">
-    <h3>Мария, Москва ⭐⭐⭐⭐⭐</h3>
-    <p>Люблю кошек, принимаю птиц и грызунов.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 916 868 74 55</p>
-      <p><strong>Email:</strong> maria@gmail.com</p>
-      <p><strong>Цена:</strong> 1400 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card"
-       data-city="санкт-петербург"
-       data-animal="собака"
-       data-with-animals="true"
-       data-with-children="true">
-    <img src="https://img.freepik.com/premium-photo/friendship-man-dog-portrait-happy-man-with-his-friend_222709-72.jpg" alt="Алексей">
-    <h3>Алексей, Санкт-Петербург ⭐⭐⭐⭐⭐</h3>
-    <p>Дом с двором, опыт работы с крупными собаками.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 981 534 38 21</p>
-      <p><strong>Email:</strong> alex.rulanov@mail.ru</p>
-      <p><strong>Цена:</strong> 1400 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-</div>
-
-<div class="sitter-grid" id="sitterGrid">
-  <div class="sitter-card" 
-       data-city="москва"
-       data-animal="собака"
-       data-with-animals="false"
-       data-with-children="false">
-    <img src="https://img.freepik.com/free-photo/handsome-guy-summer-park-with-dog_1157-22840.jpg" alt="Тимофей">
-    <h3>Тимофей, Москва ⭐⭐⭐⭐⭐</h3>
-    <p>Опытный специалист, совмещающий ответственность, любовь к животным и практические навыки ухода.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 911 189 34 46</p>
-      <p><strong>Email:</strong> tim_clock@mail.ru</p>
-      <p><strong>Цена:</strong> 1500 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card" 
-       data-city="киров"
-       data-animal="собака"
-       data-with-animals="false"
-       data-with-children="true">
-    <img src="https://img.freepik.com/premium-photo/happy-smiling-guy-with-dog-orange_87910-8369.jpg" alt="Сергей">
-    <h3>Сергей, Киров ⭐⭐⭐⭐⭐</h3>
-    <p>Обеспечиваю профессиональный уход с соблюдением всех ваших рекомендаций по рациону и распорядку дня.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 912 534 48 96</p>
-      <p><strong>Email:</strong> sergey_egorov@mail.ru</p>
-      <p><strong>Цена:</strong> 1100 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card"
-       data-city="санкт-петербург"
-       data-animal="кошка"
-       data-with-animals="true"
-       data-with-children="true">
-    <img src="https://media.istockphoto.com/id/1301158790/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BA%D1%80%D1%83%D0%BF%D0%BD%D1%8B%D0%BC-%D0%BF%D0%BB%D0%B0%D0%BD%D0%BE%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82-%D0%BA%D1%80%D0%B0%D1%81%D0%B8%D0%B2%D0%BE%D0%B9-%D0%B2%D0%B5%D1%81%D0%B5%D0%BB%D0%BE%D0%B9-%D0%BC%D0%BE%D0%BB%D0%BE%D0%B4%D0%BE%D0%B9-%D0%B6%D0%B5%D0%BD%D1%89%D0%B8%D0%BD%D1%8B-%D1%81-%D0%BC%D0%B8%D0%BB%D0%BE%D0%B9-%D1%81%D0%B5%D1%80%D0%BE%D0%B9-%D0%BA%D0%BE%D1%88%D0%BA%D0%BE%D0%B9-%D0%BD%D0%B0-%D1%80%D1%83%D0%BA%D0%B0%D1%85-%D1%83-%D1%81%D0%B5%D0%B1%D1%8F.jpg?s=612x612&w=0&k=20&c=28Xg8g7c_KQPFHDSS64iBOK7aM9lRS9pcmeZso6RSuI=" alt="Ольга">
-    <h3>Ольга, Санкт-Петербург ⭐⭐⭐⭐⭐</h3>
-    <p>Ветеринарное образование и опыт работы в клинике гарантируют, что ваш питомец будет в безопасности.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 916 843 27 55</p>
-      <p><strong>Email:</strong> zoocats_11@gmail.com</p>
-      <p><strong>Цена:</strong> 1200 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card"
-       data-city="москва"
-       data-animal="птицы"
-       data-with-animals="true"
-       data-with-children="true">
-    <img src="https://img.freepik.com/free-photo/medium-shot-woman-with-parrot-studio_23-2150747657.jpg?semt=ais_hybrid&w=740&q=80" alt="Екатерина">
-    <h3>Екатерина, Москва ⭐⭐⭐⭐⭐</h3>
-    <p>Готова приехать к вашему питомцу домой, чтобы он не стрессовал в незнакомой обстановке..</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 953 675 38 56</p>
-      <p><strong>Email:</strong> bird_sinica@mail.ru</p>
-      <p><strong>Цена:</strong> 1800 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-</div>
-
-<div class="sitter-grid" id="sitterGrid">
-  <div class="sitter-card" 
-       data-city="калининград"
-       data-animal="кошка"
-       data-with-animals="true"
-       data-with-children="false">
-    <img src="https://img.freepik.com/premium-photo/close-up-man-holding-cat-home_1048944-2504051.jpg?semt=ais_hybrid&w=740&q=80" alt="Арсений">
-    <h3>Арсений, Калининград ⭐⭐⭐⭐⭐</h3>
-    <p>Ответственный и опытный зооситтер с рекомендациями.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 900 305 81 29</p>
-      <p><strong>Email:</strong> Arc_Nazarov@mail.ru</p>
-      <p><strong>Цена:</strong> 1100 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card" 
-       data-city="нижний новгород"
-       data-animal="грызуны"
-       data-with-animals="true"
-       data-with-children="true">
-    <img src="https://thumbs.dreamstime.com/b/%D0%B6%D0%B5%D0%BD%D1%89%D0%B8%D0%BD%D0%B0-%D1%81-%D0%BA%D1%80%D1%8B%D1%81%D0%BE%D0%B9-%D0%BD%D0%B0-%D0%B5%D0%B5-%D0%BF-%D0%B5%D1%87%D0%B5-50421052.jpg" alt="Милана">
-    <h3>Милана, Нижний Новгород ⭐⭐⭐⭐⭐</h3>
-    <p>Люблю животных всей душой и готова подарить вашему хвостику всю свою заботу.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 912 384 24 69</p>
-      <p><strong>Email:</strong> milk_white@mail.ru</p>
-      <p><strong>Цена:</strong> 1300 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card"
-       data-city="казань"
-       data-animal="собака"
-       data-with-animals="false"
-       data-with-children="false">
-    <img src="https://images.freeimages.com/images/large-previews/d8a/girl-with-dog-1474549.jpg" alt="София">
-    <h3>София, Казань ⭐⭐⭐⭐☆</h3>
-    <p>Гуляю, играю и уделяю максимум внимания, чтобы питомец не скучал по вам.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 916 294 79 55</p>
-      <p><strong>Email:</strong> Gromova.So@gmail.com</p>
-      <p><strong>Цена:</strong> 1200 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-
-  <div class="sitter-card"
-       data-city="нижний новгород"
-       data-animal="собака"
-       data-with-animals="true"
-       data-with-children="true">
-    <img src="https://st3.depositphotos.com/1177973/13483/i/450/depositphotos_134835404-stock-photo-handsome-man-with-dog.jpg" alt="Владимир">
-    <h3>Владимир, Нижний Новгород ⭐⭐⭐☆☆</h3>
-    <p>Обеспечу регулярный выгул, кормление по графику и медикаментозный уход, если потребуется.</p>
-
-    <div class="contact-info">
-      <p><strong>Телефон:</strong> +7 921 370 16 20</p>
-      <p><strong>Email:</strong> Vl_Vl_1986@mail.ru</p>
-      <p><strong>Цена:</strong> 1200 ₽ / сутки</p>
-    </div>
-
-    <button class="btn secondary contact-btn">Как со мной связаться</button>
-  </div>
-</div>
+<!-- Контейнер для карточек -->
+<div class="sitter-grid" id="sitterGrid"></div>
 
 <footer>
   <p>© 2025 LapaDom</p>
 </footer>
 
 <script>
-// === ФИЛЬТРАЦИЯ СИТТЕРОВ ===
-document.getElementById("filterForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+  // ---------- ДАННЫЕ ПО УМОЛЧАНИЮ ----------
+  const defaultSitters = [
+    {
+      id: 'sofia_kazan',
+      name: 'София',
+      city: 'казань',
+      animal: 'собака',
+      withAnimals: false,
+      withChildren: false,
+      description: 'Гуляю, играю и уделяю максимум внимания, чтобы питомец не скучал по вам.',
+      phone: '+7 916 294 79 55',
+      email: 'Gromova.So@gmail.com',
+      price: '1200',
+      image: 'data:image/jpeg;base64,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',
+      rating: 4
+    },
+   
+    
+  ];
 
-  const cityInput = document.getElementById("cityFilter").value.toLowerCase().trim();
-  const animalInput = document.getElementById("animalType").value.toLowerCase().trim();
-  const withAnimals = document.getElementById("withOtherAnimals").checked;
-  const withChildren = document.getElementById("withChildren").checked;
-
-  const sitters = document.querySelectorAll(".sitter-card");
-  let visibleCount = 0;
-
-  sitters.forEach(card => {
-    const cardCity = card.dataset.city;
-    const cardAnimal = card.dataset.animal;
-    const cardWithAnimals = card.dataset.withAnimals === "true";
-    const cardWithChildren = card.dataset.withChildren === "true";
-
-    const matchesCity = !cityInput || cardCity.includes(cityInput);
-    const matchesAnimal = !animalInput || cardAnimal.includes(animalInput);
-    const matchesAnimals = !withAnimals || cardWithAnimals;
-    const matchesChildren = !withChildren || cardWithChildren;
-
-    if (matchesCity && matchesAnimal && matchesAnimals && matchesChildren) {
-      card.style.display = "block";
-      visibleCount++;
-    } else {
-      card.style.display = "none";
+  // ---------- ПРЕОБРАЗОВАНИЕ ЗАЯВКИ ИЗ LOCALSTORAGE В ФОРМАТ СИТТЕРА ----------
+  function convertApplicationToSitter(app) {
+    const id = 'app_' + app.fullName.replace(/\s+/g, '_') + '_' + app.city.replace(/\s+/g, '_') + '_' + app.date;
+    const animalString = Array.isArray(app.animalTypes) ? app.animalTypes.join(', ') : app.animalTypes || 'домашние животные';
+    let description = app.description || '';
+    if (app.experience) {
+      description = 'Опыт: ' + app.experience + '. ' + description;
     }
-  });
-
-  if (visibleCount === 0) {
-    if (!document.getElementById("noResults")) {
-      const message = document.createElement("p");
-      message.id = "noResults";
-      message.textContent = "😿 Подходящих ситтеров не найдено. Попробуйте изменить фильтры.";
-      message.style.textAlign = "center";
-      message.style.marginTop = "20px";
-      document.getElementById("sitterGrid").appendChild(message);
-    }
-  } else {
-    const msg = document.getElementById("noResults");
-    if (msg) msg.remove();
+    const image = app.photoUrl || 'https://via.placeholder.com/300x200?text=Нет+фото';
+    return {
+      id: id,
+      name: app.fullName,
+      city: app.city.toLowerCase(),
+      animal: animalString,
+      withAnimals: app.withAnimals || false,
+      withChildren: app.withChildren || false,
+      description: description,
+      phone: app.phone,
+      email: app.email,
+      price: app.price,
+      image: image,
+      rating: 5 // новым ситтерам ставим высокий рейтинг по умолчанию
+    };
   }
-});
 
-// === ПОКАЗ КОНТАКТОВ ===
-document.querySelectorAll(".contact-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const card = button.closest(".sitter-card");
-    const info = card.querySelector(".contact-info");
+  // ---------- ЗАГРУЗКА ВСЕХ СИТТЕРОВ ----------
+  function loadSitters() {
+    const storedApproved = localStorage.getItem('approvedSitters');
+    const approvedSitters = storedApproved ? JSON.parse(storedApproved) : [];
+    
+    const applications = JSON.parse(localStorage.getItem('sitterApplications') || '[]');
+    const approvedApplications = applications.filter(app => app.status === 'approved');
+    const convertedApps = approvedApplications.map(convertApplicationToSitter);
+    
+    const sittersMap = new Map();
+    defaultSitters.forEach(s => sittersMap.set(s.id, s));
+    approvedSitters.forEach(s => { if (!sittersMap.has(s.id)) sittersMap.set(s.id, s); });
+    convertedApps.forEach(s => { if (!sittersMap.has(s.id)) sittersMap.set(s.id, s); });
+    
+    return Array.from(sittersMap.values());
+  }
 
-    // Переключаем показ блока
-    info.style.display = (info.style.display === "block") ? "none" : "block";
+  // ---------- СОХРАНЕНИЕ ОДОБРЕННЫХ В STORAGE ----------
+  function saveApprovedSitters(approvedList) {
+    localStorage.setItem('approvedSitters', JSON.stringify(approvedList));
+  }
+
+  window.addApprovedSitter = function(sitter) {
+    if (!sitter.id) sitter.id = 'sitter_' + Date.now() + Math.random().toString(36).substr(2, 5);
+    let approved = JSON.parse(localStorage.getItem('approvedSitters') || '[]');
+    if (!approved.some(s => s.id === sitter.id)) {
+      approved.push(sitter);
+      saveApprovedSitters(approved);
+      renderSitters(getCurrentFilter());
+    }
+  };
+
+  // ---------- ПОЛУЧЕНИЕ ТЕКУЩИХ ЗНАЧЕНИЙ ФИЛЬТРА ----------
+  function getCurrentFilter() {
+    return {
+      city: document.getElementById('cityFilter').value.toLowerCase().trim(),
+      animal: document.getElementById('animalType').value.toLowerCase().trim(),
+      withAnimals: document.getElementById('withOtherAnimals').checked,
+      withChildren: document.getElementById('withChildren').checked
+    };
+  }
+
+  // ---------- ФУНКЦИЯ ОБНОВЛЕНИЯ РЕЙТИНГА (ЗВЁЗД) В КАРТОЧКЕ ---------- // <-- NEW
+  function updateAverageRating(card) {
+    const sitterId = card.dataset.sitterId;
+    const reviews = JSON.parse(localStorage.getItem(`reviews_${sitterId}`)) || [];
+    
+    let average;
+    if (reviews.length === 0) {
+      // Если отзывов нет, используем рейтинг по умолчанию (из data-атрибута)
+      average = parseFloat(card.dataset.defaultRating) || 5;
+    } else {
+      const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+      average = sum / reviews.length;
+    }
+    
+    // Округляем до одного знака после запятой для красоты (но звёзды целые)
+    const rounded = Math.round(average * 2) / 2; // можно просто целое
+    const fullStars = Math.floor(rounded);
+    const halfStar = (rounded - fullStars) >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStar;
+    
+    let starsHtml = '★'.repeat(fullStars);
+    if (halfStar) starsHtml += '½'; // или использовать символ половины звезды, но для простоты оставим целые
+    starsHtml += '☆'.repeat(emptyStars);
+    
+    const starsSpan = card.querySelector('.rating-stars');
+    if (starsSpan) {
+      starsSpan.textContent = starsHtml;
+    }
+  }
+
+  // ---------- ОТРИСОВКА КАРТОЧЕК ----------
+  function renderSitters(filter = { city: '', animal: '', withAnimals: false, withChildren: false }) {
+    const sitters = loadSitters();
+    const grid = document.getElementById('sitterGrid');
+    grid.innerHTML = '';
+
+    let visibleCount = 0;
+
+    sitters.forEach(s => {
+      const matchesCity = !filter.city || s.city.toLowerCase().includes(filter.city);
+      const matchesAnimal = !filter.animal || s.animal.toLowerCase().includes(filter.animal);
+      const matchesAnimals = !filter.withAnimals || s.withAnimals === true;
+      const matchesChildren = !filter.withChildren || s.withChildren === true;
+
+      if (matchesCity && matchesAnimal && matchesAnimals && matchesChildren) {
+        visibleCount++;
+        const card = createSitterCard(s);
+        grid.appendChild(card);
+      }
+    });
+
+    if (visibleCount === 0) {
+      const msg = document.createElement('p');
+      msg.id = 'noResults';
+      msg.textContent = '😿 Подходящих ситтеров не найдено. Попробуйте изменить фильтры.';
+      msg.style.textAlign = 'center';
+      msg.style.marginTop = '20px';
+      grid.appendChild(msg);
+    } else {
+      const oldMsg = document.getElementById('noResults');
+      if (oldMsg) oldMsg.remove();
+    }
+  }
+
+  // ---------- СОЗДАНИЕ ОДНОЙ КАРТОЧКИ (С ДИНАМИЧЕСКИМ РЕЙТИНГОМ) ----------
+  function createSitterCard(s) {
+    const card = document.createElement('div');
+    card.className = 'sitter-card';
+    card.dataset.city = s.city;
+    card.dataset.animal = s.animal;
+    card.dataset.withAnimals = s.withAnimals;
+    card.dataset.withChildren = s.withChildren;
+    card.dataset.sitterId = s.id;
+    card.dataset.defaultRating = s.rating; // <-- NEW сохраняем рейтинг по умолчанию
+
+    card.innerHTML = `
+      <img src="${s.image}" alt="${s.name}">
+      <h3>${s.name}, ${s.city} <span class="rating-stars"></span></h3> <!-- NEW: отдельный контейнер для звёзд -->
+      <p>${s.description}</p>
+      <div class="contact-info">
+        <p><strong>Телефон:</strong> ${s.phone}</p>
+        <p><strong>Email:</strong> ${s.email}</p>
+        <p><strong>Цена:</strong> ${s.price} ₽ / сутки</p>
+      </div>
+      <button class="btn secondary contact-btn">Как со мной связаться</button>
+      <div class="reviews-section">
+        <button class="show-reviews-btn" onclick="toggleReviews(this)">Показать отзывы</button>
+        <div class="reviews-list" style="display: none;"></div>
+        <div class="review-form">
+          <h4>Оставить отзыв</h4>
+          <input type="text" class="review-name" placeholder="Ваше имя" required>
+          <select class="review-rating" required>
+            <option value="">Оцените ситтера</option>
+            <option value="5">★★★★★ Отлично</option>
+            <option value="4">★★★★☆ Хорошо</option>
+            <option value="3">★★★☆☆ Удовлетворительно</option>
+            <option value="2">★★☆☆☆ Плохо</option>
+            <option value="1">★☆☆☆☆ Ужасно</option>
+          </select>
+          <textarea class="review-text" placeholder="Ваш отзыв..." required></textarea>
+          <button class="btn secondary" onclick="submitReview(this)">Отправить отзыв</button>
+        </div>
+        <button class="review-btn" onclick="showReviewForm(this)">Оставить отзыв</button>
+      </div>
+    `;
+
+    // Обработчик для кнопки контактов
+    const contactBtn = card.querySelector('.contact-btn');
+    contactBtn.addEventListener('click', () => {
+      const info = card.querySelector('.contact-info');
+      info.style.display = (info.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // Загружаем отзывы и устанавливаем рейтинг
+    displayReviews(card);
+    updateAverageRating(card); // <-- NEW устанавливаем актуальные звёзды
+
+    return card;
+  }
+
+  // ---------- ФУНКЦИИ ДЛЯ ОТЗЫВОВ ----------
+  window.showReviewForm = function(button) {
+    const card = button.closest('.sitter-card');
+    const form = card.querySelector('.review-form');
+    form.classList.toggle('show');
+  };
+
+  window.submitReview = function(button) {
+    const card = button.closest('.sitter-card');
+    const form = card.querySelector('.review-form');
+    const name = card.querySelector('.review-name').value;
+    const rating = card.querySelector('.review-rating').value;
+    const text = card.querySelector('.review-text').value;
+
+    if (!name || !rating || !text) {
+      alert('Пожалуйста, заполните все поля');
+      return;
+    }
+
+    const review = {
+      name: name,
+      rating: parseInt(rating),
+      text: text,
+      date: new Date().toLocaleDateString('ru-RU'),
+      sitterId: card.dataset.sitterId
+    };
+
+    let reviews = JSON.parse(localStorage.getItem(`reviews_${review.sitterId}`)) || [];
+    reviews.push(review);
+    localStorage.setItem(`reviews_${review.sitterId}`, JSON.stringify(reviews));
+
+    displayReviews(card);
+    updateAverageRating(card); // <-- NEW пересчитываем и обновляем звёзды
+    form.reset();
+    form.classList.remove('show');
+    alert('Спасибо за ваш отзыв!');
+  };
+
+  function displayReviews(card) {
+    const sitterId = card.dataset.sitterId;
+    const reviews = JSON.parse(localStorage.getItem(`reviews_${sitterId}`)) || [];
+    const reviewsList = card.querySelector('.reviews-list');
+    if (!reviewsList) return;
+
+    reviewsList.innerHTML = '';
+
+    if (reviews.length === 0) {
+      reviewsList.innerHTML = '<p>Пока нет отзывов. Будьте первым!</p>';
+      return;
+    }
+
+    reviews.forEach(review => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      item.innerHTML = `
+        <div class="review-header">
+          <span class="review-author">${review.name}</span>
+          <span class="review-date">${review.date}</span>
+        </div>
+        <div class="star-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</div>
+        <p>${review.text}</p>
+      `;
+      reviewsList.appendChild(item);
+    });
+  }
+
+  window.toggleReviews = function(button) {
+    const reviewsList = button.nextElementSibling;
+    if (reviewsList.style.display === 'none') {
+      reviewsList.style.display = 'block';
+      button.textContent = 'Скрыть отзывы';
+    } else {
+      reviewsList.style.display = 'none';
+      button.textContent = 'Показать отзывы';
+    }
+  };
+
+  // ---------- ОБРАБОТЧИК ФИЛЬТРА ----------
+  document.getElementById('filterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const filter = getCurrentFilter();
+    renderSitters(filter);
   });
-});
+
+  // ---------- ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ----------
+  document.addEventListener('DOMContentLoaded', function() {
+    renderSitters({ city: '', animal: '', withAnimals: false, withChildren: false });
+  });
 </script>
 
 </body>
