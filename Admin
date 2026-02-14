@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LapaDom — Панель администратора</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-panel {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .application-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #3a7c59;
+        }
+        
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .status-new {
+            background-color: #ffeb3b;
+            color: #333;
+        }
+        
+        .status-approved {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .animal-types {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        
+        .animal-type {
+            background-color: #e8f5e9;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">🐾 <strong>LapaDom</strong> Админ</div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="index.html">На сайт</a></li>
+                    <li><a href="admin.html" class="active">Заявки ситтеров</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="admin-panel">
+        <h1>Заявки ситтеров</h1>
+        <div id="applicationsList"></div>
+    </section>
+    
+    <script>
+    function loadApplications() {
+        const applications = JSON.parse(localStorage.getItem('sitterApplications')) || [];
+        const list = document.getElementById('applicationsList');
+        
+        if (applications.length === 0) {
+            list.innerHTML = '<p>Нет заявок от ситтеров</p>';
+            return;
+        }
+        
+        list.innerHTML = '';
+        
+        applications.forEach((app, index) => {
+            const card = document.createElement('div');
+            card.className = 'application-card';
+            card.innerHTML = `
+                <div class="application-header">
+                    <h3>${app.fullName} - ${app.city}</h3>
+                    <span class="status status-${app.status || 'new'}">
+                        ${app.status === 'approved' ? '✓ Одобрено' : 'Новая'}
+                    </span>
+                </div>
+                <p><strong>Контакты:</strong> ${app.phone}, ${app.email}</p>
+                <p><strong>Цена:</strong> ${app.price} ₽/сутки</p>
+                <div class="animal-types">
+                    ${app.animalTypes.map(type => `<span class="animal-type">${type}</span>`).join('')}
+                </div>
+                <p><strong>Условия:</strong> ${app.withAnimals ? '✓ С животными' : '✗ Без животных'}, 
+                ${app.withChildren ? '✓ С детьми' : '✗ Без детей'}</p>
+                ${app.experience ? `<p><strong>Опыт:</strong> ${app.experience}</p>` : ''}
+                <p><strong>Описание:</strong> ${app.description}</p>
+                ${app.photoUrl ? `<img src="${app.photoUrl}" alt="Фото ситтера" style="max-width: 200px; margin-top: 10px; border-radius: 10px;">` : ''}
+                <div class="actions">
+                    <button class="btn primary" onclick="approveApplication(${index})">Одобрить</button>
+                    <button class="btn secondary" onclick="deleteApplication(${index})">Удалить</button>
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                    Заявка отправлена: ${new Date(app.date).toLocaleDateString('ru-RU')}
+                </p>
+            `;
+            list.appendChild(card);
+        });
+    }
+    
+    function approveApplication(index) {
+        let applications = JSON.parse(localStorage.getItem('sitterApplications')) || [];
+        applications[index].status = 'approved';
+        localStorage.setItem('sitterApplications', JSON.stringify(applications));
+        loadApplications();
+        alert('Заявка одобрена!');
+    }
+    
+    function deleteApplication(index) {
+        if (confirm('Удалить эту заявку?')) {
+            let applications = JSON.parse(localStorage.getItem('sitterApplications')) || [];
+            applications.splice(index, 1);
+            localStorage.setItem('sitterApplications', JSON.stringify(applications));
+            loadApplications();
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadApplications);
+    </script>
+</body>
+</html>
