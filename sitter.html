@@ -31,8 +31,168 @@
 <section class="container">
   <h1>Помогайте животным и зарабатывайте</h1>
   
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfmjzEegZlTkThDQvkFHnbJRMM7OoqnObXLcHGFafZ1lKve1w/viewform?embedded=true" width="640" height="1745" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+  <section class="container">
+  <h1>Помогайте животным и зарабатывайте</h1>
+  
+  <div id="sitterForm" class="sitter-application-form">
+    <h2>Анкета ситтера</h2>
+    
+    <div class="form-group">
+      <label>Имя и фамилия *</label>
+      <input type="text" id="fullName" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Город *</label>
+      <input type="text" id="city" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Телефон *</label>
+      <input type="tel" id="phone" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" id="email" required>
+    </div>
+    
+    <div class="form-group">
+      <label>С какими животными вы готовы работать? *</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="dogs" value="собака">
+          <label for="dogs">Собаки</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="cats" value="кошка">
+          <label for="cats">Кошки</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="rodents" value="грызуны">
+          <label for="rodents">Грызуны</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="birds" value="птицы">
+          <label for="birds">Птицы</label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Ваши условия</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="withAnimals">
+          <label for="withAnimals">С другими животными</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="withChildren">
+          <label for="withChildren">С детьми</label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Опыт работы с животными</label>
+      <textarea id="experience" rows="3" placeholder="Опишите ваш опыт..."></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label>Описание услуг *</label>
+      <textarea id="description" rows="4" required placeholder="Расскажите о себе и ваших услугах..."></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label>Цена за сутки (руб.) *</label>
+      <input type="number" id="price" required min="0">
+    </div>
+    
+    <div class="form-group">
+      <label>Ссылка на ваше фото (URL)</label>
+      <input type="url" id="photoUrl" placeholder="https://...">
+    </div>
+    
+    <button class="btn primary" onclick="submitSitterForm()">Отправить анкету</button>
+    
+    <div id="formSuccess" class="form-success">
+      <p>✅ Ваша анкета успешно отправлена! Мы свяжемся с вами в ближайшее время.</p>
+    </div>
+  </div>
 
+  <div class="rules-block">
+    <h3>Ваши обязанности и права</h3>
+    <ul>
+      <li>Соблюдать правила ухода за животными.</li>
+      <li>Честно указывать свои условия и опыт.</li>
+      <li>Сообщать владельцу о любых происшествиях.</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+function submitSitterForm() {
+  // Получаем значения из формы
+  const application = {
+    fullName: document.getElementById('fullName').value,
+    city: document.getElementById('city').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    animalTypes: [],
+    withAnimals: document.getElementById('withAnimals').checked,
+    withChildren: document.getElementById('withChildren').checked,
+    experience: document.getElementById('experience').value,
+    description: document.getElementById('description').value,
+    price: document.getElementById('price').value,
+    photoUrl: document.getElementById('photoUrl').value,
+    date: new Date().toISOString(),
+    status: 'new'
+  };
+  
+  // Собираем выбранные типы животных
+  if (document.getElementById('dogs').checked) application.animalTypes.push('собака');
+  if (document.getElementById('cats').checked) application.animalTypes.push('кошка');
+  if (document.getElementById('rodents').checked) application.animalTypes.push('грызуны');
+  if (document.getElementById('birds').checked) application.animalTypes.push('птицы');
+  
+  // Проверяем обязательные поля
+  if (!application.fullName || !application.city || !application.phone || 
+      !application.email || !application.description || !application.price || 
+      application.animalTypes.length === 0) {
+    alert('Пожалуйста, заполните все обязательные поля (*)');
+    return;
+  }
+  
+  // Получаем существующие заявки из localStorage
+  let applications = JSON.parse(localStorage.getItem('sitterApplications')) || [];
+  
+  // Добавляем новую заявку
+  applications.push(application);
+  
+  // Сохраняем обратно в localStorage
+  localStorage.setItem('sitterApplications', JSON.stringify(applications));
+  
+  // Показываем сообщение об успехе
+  document.getElementById('formSuccess').classList.add('show');
+  
+  // Очищаем форму
+  document.getElementById('sitterForm').reset();
+  
+  // Прокручиваем к сообщению об успехе
+  document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth' });
+  
+  // Через 5 секунд скрываем сообщение
+  setTimeout(() => {
+    document.getElementById('formSuccess').classList.remove('show');
+  }, 5000);
+  
+  // В реальном приложении здесь бы была отправка на сервер
+  console.log('Заявка ситтера:', application);
+  
+  // Для демонстрации: показываем все заявки в консоли
+  console.log('Все заявки:', applications);
+}
+</script>
  
 
   <div class="rules-block">
